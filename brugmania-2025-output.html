@@ -1,0 +1,206 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&amp;display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #AA176D;
+            margin: 0;
+            padding: 0;
+            font-family: Roboto, arial, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        
+        .full-banner-link {
+            display: block;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+
+        .arrow {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 3px 3px 0 0;
+            display: inline-block;
+            height: .65rem;
+            width: .65rem;
+            transform: rotate(45deg);
+            z-index: 9999; /* Ensure it stays on top */
+        }
+
+        .banner {
+            background-color: #AA176D;
+            text-align: center;
+            padding: 0px;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100vh; /* Ensure the banner takes the full height of the iframe */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0; /* Start invisible */
+            animation: banner-animation 1.5s ease-out forwards; /* Apply animation */
+        }
+
+        .banner img {
+            width: var(--img-width, 20vw); /* Default width is 20% of the viewport width */
+            margin-left: auto; /* Align images to the right */
+            max-width: 100%; /* Ensure the image doesn't exceed its natural size */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .banner img:nth-child(1) {
+            margin-top: -2.6vw;
+            --img-width: 26vw;
+            z-index: 4;
+            margin-right: var(--img-margin-right, 46.5vw);
+            animation: slide-in-from-left 0.5s ease-out forwards; /* Apply animation */
+        }
+
+        .banner img:nth-child(2) {
+            margin-top: -2.6vw;
+            --img-width: 73vw;
+            z-index: 5;
+            animation: slide-in-from-right 0.5s ease-out forwards; /* Apply animation */
+        }
+
+        .banner img:nth-child(3) {
+            /* Het is weer */
+            margin-top: -2.4vw;
+            --img-width: 20vw;
+            margin-right: var(--img-margin-right, 39vw);
+            z-index: 6;
+            opacity: 0; /* Start invisible */
+            animation: pop-in 0.4s ease-out 1.0s forwards; /* Apply pop effect 
+            after a delay */
+        }
+
+        .banner img:nth-child(4) {
+            /* Brugmania */
+            margin-top: -4.2vw;
+            --img-width: 30vw;
+            margin-right: var(--img-margin-right, 32vw);
+            z-index: 5;
+            opacity: 0; /* Start invisible */
+            animation: fall-in 0.4s ease-out 1.4s forwards, pulse 1.0s ease-in-out 2.0s infinite; /* Apply fall-in animation after a delay */
+        }
+
+        .banner img:nth-child(5) {
+            /* 1500 korting */
+            --img-width: 80vw;
+            margin-right: var(--img-margin-right, 9.5vw);
+            margin-top: 0.5vw;
+            opacity: 0; /* Start invisible */
+            animation: slide-in-bottom 1s ease-out 1.1s forwards; /* Slide in from bottom with delay */
+        }
+        @keyframes banner-animation {
+        0% {
+            opacity: 1;
+            transform: scale(0.4) translateY(30px);
+        }
+        25% {
+            transform: scale(1.2) translateY(20px);
+        }
+        50% {
+            transform: scale(1.2) translateY(30px);
+        }
+        75% {
+            transform: scale(1.1) translateY(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+        @keyframes slide-in-from-left {
+            0% {
+                transform: translateX(-100vw); /* Start off-screen */
+                opacity: 0; /* Fully transparent */
+            }
+            100% {
+                transform: translateX(0); /* Move to its original position */
+                opacity: 1; /* Fully visible */
+            }
+        }
+        @keyframes slide-in-from-right {
+            0% {
+                transform: translateX(100vw); /* Start off-screen */
+                opacity: 0; /* Fully transparent */
+            }
+            100% {
+                transform: translateX(0); /* Move to its original position */
+                opacity: 1; /* Fully visible */
+            }
+        }
+        @keyframes pop-in {
+            0% {
+                transform: scale(0.8); /* Start smaller for a slight pop effect */
+                opacity: 0; /* Fully transparent */
+            }
+            50% {
+                transform: scale(2.0); /* Original size */
+                opacity: 1; /* Fully visible */
+            }
+            100% {
+                transform: scale(1); /* Original size */
+                opacity: 1; /* Fully visible */
+            }
+        }
+        @keyframes fall-in {
+            0% {
+                transform: translateY(-20px); /* Start above the viewport */
+                opacity: 0; /* Fully transparent */
+            }
+            100% {
+                transform: translateY(0); /* Move to its final position */
+                opacity: 1; /* Fully visible */
+            }
+        }
+        @keyframes slide-in-bottom {
+            0% {
+                transform: translateY(100vh); /* Start below the viewport */
+                opacity: 0; /* Fully transparent */
+            }
+            100% {
+                transform: translateY(0); /* Move to its final position */
+                opacity: 1; /* Fully visible */
+            }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-0.5vh); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+<a href="https://www.brugman.nl/brugmania" class="full-banner-click" target="_parent">
+    <div class="banner">
+        <img src="https://cmpgn.nl/brugman/brugmania-2025/ja.svg" alt="Ja">
+        <img src="https://cmpgn.nl/brugman/brugmania-2025/jaaaaa.svg" alt="Jaaaaa">
+        <img src="https://cmpgn.nl/brugman/brugmania-2025/hetisweer.svg" alt="Het is weer">
+        <img src="https://cmpgn.nl/brugman/brugmania-2025/brugmania.svg" alt="Brugmania">
+        <img src="https://cmpgn.nl/brugman/brugmania-2025/1500.svg" alt="1500">
+        
+     </div>
+     
+     <div class="arrow">&nbsp;</div>   
+    </a>
+
+
+</body></html>
