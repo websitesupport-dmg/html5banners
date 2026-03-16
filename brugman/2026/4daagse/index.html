@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Asap, Arial, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .arrow {
+            position: fixed;
+            bottom: 1.70rem;
+            right: 1.25rem;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 3px 3px 0 0;
+            display: inline-block;
+            height: .65rem;
+            width: .65rem;
+            transform: rotate(45deg);
+            z-index: 9999; /* Ensure it stays on top */
+        }
+
+        .banner {
+            background-color: #69a63a;
+            text-align: center;
+            padding:  30px;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100vh; /* Ensure the banner takes the full height of the iframe */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* .column .dataimg {
+            max-width: 280px;
+        } */
+
+        .column {
+            flex: 1 1 50%;
+            max-width: 50%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .column-full {
+            flex: 1 1 50%;
+            max-width: 70%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .column .image1 {
+            max-width: 70%;
+            height: auto;
+        }
+
+        .column .image2 {
+            padding-top: 2%;
+            max-width: 94%;
+            height: auto;
+        }
+
+        .column .image3 {
+            /* padding-top: 02%;
+            max-width: 97%; */
+            padding-top: 0%;
+            max-width: 80%;
+            height: auto;
+        }
+
+        .column img {
+            max-width: 95%;
+            height: auto;
+        }
+
+        .text-row {
+            margin-top: 5%;
+            color: white;
+            font-size: 3vw;
+            text-align: left;
+        }
+
+       
+
+        @keyframes slide-bump {
+            0% { transform: translateX(-100%) scale(1); opacity: 0; }
+            70% { transform: translateX(0) scale(1); opacity: 1; }
+            80% { transform: translateX(0) scale(1.1); }
+            100% { transform: translateX(0) scale(1); }
+        }
+
+        .slide-bump-animation {
+            animation: slide-bump 1.5s ease-in-out;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        .fall-animation {
+            animation: fall 1s ease-in-out;
+        }
+
+        .fall-animation-delayed1 {
+            animation: fall 1s ease-in-out 0.4s, float 3s ease-in-out 1.4s infinite;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .fall-animation-delayed2 {
+            animation: fall 1s ease-in-out 0.2s, float 3s ease-in-out 1.2s infinite;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .fall-animation-delayed3 {
+            animation: fall 1s ease-in-out 0s, float 3s ease-in-out 1s infinite;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes slide-up {
+            0% { transform: translateY(100%) scale(1); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes tilt {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes appear-tilt {
+            0% { transform: scale(0.5) rotate(-30deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes tilt-back {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes scale-up {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .slide-up-animation {
+            animation: slide-up 0.5s ease-in-out, tilt 0.5s ease-in-out 1.5s;
+        }
+
+        .appear-tilt-animation {
+            animation: appear-tilt 0.3s ease-in-out 0.5s, tilt-back 0.5s ease-in-out 1.5s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .slide-up-animation-delayed {
+            animation: slide-up 0.5s ease-in-out 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .scale-up-animation {
+            animation: scale-up 0.5s ease-in-out 0.7s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        /* Ensure the second image goes to a new line only when necessary */
+        @media (max-width: 527px) {
+            /* .column:nth-child(2) {
+                flex-basis: 100%;
+                max-width: 90%;
+            } */
+            /* .column .dataimg {
+                max-width: 200px;
+            } */
+            .banner {
+                padding:  10px;
+            }
+            .column-full {
+                max-width: 100%;
+            }
+            .column img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        .calendaritems {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .calendaritems img {
+            max-width: 42%;
+            height: auto;
+            position: absolute;
+        }
+
+        .calendaritems .dataimg1 {
+            left: 0;
+            top: 2vh;
+            z-index: 3;
+        }
+
+        .calendaritems .dataimg2 {
+            width: 38%;
+            left: 23%;
+            top: 1vh;
+            z-index: 2;
+        }
+
+        .calendaritems .dataimg3 {
+            width: 38%;
+            left: 46%;
+            top: 2.5vh;
+            z-index: 1;
+        }
+
+        .calendaritems .dataimg4 {
+            width: 36%;
+            left: 69%;
+            top: 1.5vh;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+<a href="https://www.brugman.nl/acties/4-daagse/" class="full-banner-click" target="_parent"></a>
+    <div class="banner">
+        <div class="row">
+            <div class="column">
+                <img src="https://cmpgn.nl/brugman/4-daagse/1000.png" alt="1000 korting" class="slide-up-animation image2">
+                <img src="https://cmpgn.nl/brugman/4-daagse/extra-korting.png" alt="Extra montage" class="slide-up-animation-delayed image3">
+            </div>
+            <div class="column">
+                <!-- <img src="https://cmpgn.nl/brugman/4-daagse/data-img.png?v2" alt="Image 2" class="fall-animation dataimg"> -->
+                 <div class="calendaritems">
+                    <img src="https://cmpgn.nl/brugman/4-daagse/26mrt26.png?v2" alt="26 maart" class="fall-animation-delayed1 dataimg1">
+                    <img src="https://cmpgn.nl/brugman/4-daagse/27mrt26.png?v2" alt="27 maart" class="fall-animation-delayed2 dataimg2">
+                    <img src="https://cmpgn.nl/brugman/4-daagse/28mrt26.png?v2" alt="28 maart" class="fall-animation-delayed3 dataimg3">
+                    <img src="https://cmpgn.nl/brugman/4-daagse/29mrt26.png?v2" alt="29 maart" class="fall-animation dataimg4">
+                 </div>
+                
+            </div>
+        </div>
+        <div>
+            <div class="column-full">
+                <img src="https://cmpgn.nl/brugman/4-daagse/tijdens_de_brugman_4_daagse.png?v2" alt="Tijdens de Brugman korting 4-daagse" class="fall-animation scale-up-animation image4" style="width: 100%!important; text-align: left;">
+            </div>   
+        </div>
+    </div>
+
+    <div class="arrow">&nbsp;</div>   
+</a>
+</body>
+</html>
